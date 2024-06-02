@@ -1,0 +1,63 @@
+{
+  "name": "@jvddavid/json-bignumber",
+  "version": "1.0.0",
+  "license": "MIT",
+  "description": "JSON.parse with bigints support",
+  "keywords": [
+    "json",
+    "big",
+    "bignumber"
+  ],
+  "type": "module",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "author": {
+    "name": "João Victor Davi de Oliveira",
+    "email": "j.victordavid2@gmail.com",
+    "url": "https://github.com/jvddavid/json-bignumber"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/jvddavid/json-bignumber.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jvddavid/json-bignumber/issues"
+  },
+  "homepage": "https://github.com/jvddavid/json-bignumber",
+  "scripts": {
+    "build:types": "tsc -p tsconfig.types.json && tsc-alias -p tsconfig.types.json",
+    "build:esm": "bun run scripts/build.esm.ts",
+    "build:cjs": "bun run scripts/build.cjs.ts",
+    "build": "bun build:types && bun build:esm && bun build:cjs",
+    "lint": "biome lint --apply .",
+    "test": "bun test",
+    "prepublishOnly": "bun run build && bun test"
+  },
+  "packageManager": "bun@1.1.10",
+  "exports": {
+    ".": {
+      "types": "./types/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist",
+    "types"
+  ],
+  "devDependencies": {
+    "@biomejs/biome": "^1.7.3",
+    "@types/bun": "latest",
+    "bun": "^1.1.10",
+    "esbuild": "^0.21.4",
+    "tsc-alias": "^1.8.10"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "bignumber.js": "^9.1.2"
+  },
+  "optionalDependencies": {}
+}
