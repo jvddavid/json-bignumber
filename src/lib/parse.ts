@@ -79,7 +79,8 @@ export interface Options {
   constructorAction?: 'error' | 'ignore' | 'preserve'
 }
 
-export function JSONParse(options?: Options) {
+export type Parse = <T = any>(source: unknown, reviver?: (this: any, key: string, value: any) => any) => T
+export function JSONParse(options?: Options): Parse {
   // This is a function that can parse a JSON text, producing a JavaScript
   // data structure. It is a simple, recursive descent parser. It does not use
   // eval or regular expressions, so it can be used as a model for implementing
@@ -350,7 +351,12 @@ export function JSONParse(options?: Options) {
         return object // empty object
       }
       while (ch) {
-        key = string()!
+        const nKey = string()
+        if (nKey === undefined) {
+          error('Bad object key')
+          continue
+        }
+        key = nKey
         white()
         next(':')
         if (_options.strict === true && Object.hasOwnProperty.call(object, key)) {

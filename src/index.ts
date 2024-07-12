@@ -1,21 +1,19 @@
-import { JSONParse, type Options } from './lib/parse'
-import { stringify, type Replacer } from './lib/stringify'
+import { JSONParse, type Options, type Parse } from '@/lib/parse'
+import { stringify, type Stringify } from '@/lib/stringify'
+import BigNumber from 'bignumber.js'
 
-// BigNumber is a class, so we need to import it as a type
-import type BigNumber from 'bignumber.js'
-export type { BigNumber }
-
-const parse = JSONParse()
-
-// create the default method members with no options applied for backwards compatibility
-JSONBig.parse = parse
-JSONBig.stringify = stringify
-
-export { JSONBig, parse, stringify }
-export type { Options, Replacer }
-export default function JSONBig(options?: Options) {
+function JSONBig(options?: Options): {
+  parse: Parse
+  stringify: Stringify
+} {
   return {
     parse: JSONParse(options),
     stringify
   }
 }
+// create the default method members with no options applied for backwards compatibility
+const parse: Parse = JSONParse()
+JSONBig.parse = parse
+JSONBig.stringify = stringify as Stringify
+
+export { BigNumber, JSONBig, parse, stringify }

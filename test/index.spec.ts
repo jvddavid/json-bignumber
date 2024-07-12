@@ -1,6 +1,6 @@
-import JSONBig from '@/index'
+import { JSONBig } from '@/index'
+import { describe, expect, it } from '@jest/globals'
 import BigNumber from 'bignumber.js'
-import { describe, expect, it } from 'bun:test'
 
 describe('index.ts', () => {
   it('should be able to parse a big number', () => {
@@ -13,7 +13,10 @@ describe('index.ts', () => {
     expect(r1.v2).toBe(123)
   })
   it('should be able to stringify a big number', () => {
-    const r1 = JSONBig.stringify({ value: BigNumber('9223372036854775807'), v2: 123 })
+    const r1 = JSONBig.stringify({
+      value: BigNumber('9223372036854775807'),
+      v2: 123
+    })
     expect(r1).toBe('{"value":9223372036854775807,"v2":123}')
   })
 })

@@ -1,12 +1,5 @@
 # Based on https://raw.githubusercontent.com/github/gitignore/main/Node.gitignore
 
-#npmrc
-.npmrc
-
-#build
-dist/
-types/
-
 # Logs
 
 logs
